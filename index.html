@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eines d'IA per a docents</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      max-width: 1200px;
+    }
+    .tool-card {
+      width: 280px;
+      min-height: 160px;
+      border-radius: 15px;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.2rem;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+    .tool-card:hover {
+      transform: scale(1.05);
+    }
+    .tool-card .plus {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+    }
+    .tool-info {
+      display: none;
+      margin-top: 0.7rem;
+      font-weight: normal;
+      font-size: 0.85rem;
+    }
+    .tool-desc {
+      font-size: 0.8rem;
+      font-weight: normal;
+      margin-top: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Eines de suport docent amb IA</h1>
+  <div class="container"></div>
+
+  <script>
+    const tools = [
+      { name: 'Diffit', url: 'https://www.diffit.me', color: '#ffbe0b', desc: 'Textos adaptats segons nivell.', info: 'Adaptació de textos, preguntes i resums segons nivell.' },
+      { name: 'Eduaide', url: 'https://eduaide.ai', color: '#fb5607', desc: 'Generador de rúbriques i activitats.', info: 'Generació de rúbriques, activitats i preguntes segons Bloom/Webb.' },
+      { name: 'Napkin', url: 'https://www.napkin.ai', color: '#8338ec', desc: 'Organitzador visual d’idees.', info: 'Notes intel·ligents, connexions entre idees, pensament visual.' },
+      { name: 'Twee', url: 'https://www.twee.com', color: '#3a86ff', desc: 'Activitats EFL per a classe.', info: 'EFL: speaking, writing, jocs, activitats lúdiques i gramàtica.' },
+      { name: 'ChatGPT', url: 'https://chat.openai.com', color: '#2a9d8f', desc: 'Motor creatiu de continguts.', info: 'Generació creativa de textos, rols simulats, resums, feedback.' },
+      { name: 'Notebook LM', url: 'https://notebooklm.google', color: '#ff006e', desc: 'Resums i esquemes automàtics.', info: 'Resums automàtics, esquemes, preguntes clau des de documents.' },
+      { name: 'Gamma', url: 'https://gamma.app', color: '#6a4c93', desc: 'Presentacions IA intuïtives.', info: 'Presentacions visuals, netes i interactives amb suport IA.' },
+      { name: 'Brisk', url: 'https://www.briskteaching.com', color: '#ef476f', desc: 'Feedback i rúbriques ràpides.', info: 'Feedback a Google Docs, rúbriques, exàmens, traducció, podcast.' },
+      { name: 'Classroomscreen', url: 'https://www.classroomscreen.com', color: '#118ab2', desc: 'Gestió visual de classe.', info: 'Gestió visual de l\'aula: temporitzadors, semàfors, pissarra digital.' },
+      { name: 'Poe.com', url: 'https://poe.com', color: '#ffd166', desc: 'Tutors IA personalitzats.', info: 'Assistents i tutors virtuals per practicar i rebre feedback personalitzat.' },
+      { name: 'Krea.ai', url: 'https://www.krea.ai', color: '#06d6a0', desc: 'Creació d’imatges creatives.', info: 'Generació d\'imatges creatives a partir de descripcions.' },
+      { name: 'Suno.ai', url: 'https://suno.ai', color: '#f15bb5', desc: 'Cançons didàctiques IA.', info: 'Creació de cançons didàctiques per a reforçar l\'aprenentatge lingüístic.' }
+    ];
+
+    const container = document.querySelector('.container');
+
+    tools.forEach(tool => {
+      const card = document.createElement('div');
+      card.className = 'tool-card';
+      card.style.backgroundColor = tool.color;
+      card.onclick = () => window.open(tool.url, '_blank');
+
+      const title = document.createElement('div');
+      title.textContent = tool.name;
+
+      const desc = document.createElement('div');
+      desc.className = 'tool-desc';
+      desc.textContent = tool.desc;
+
+      const plus = document.createElement('div');
+      plus.className = 'plus';
+      plus.textContent = '+';
+
+      const info = document.createElement('div');
+      info.className = 'tool-info';
+      info.textContent = tool.info;
+
+      plus.onclick = (e) => {
+        e.stopPropagation();
+        info.style.display = info.style.display === 'block' ? 'none' : 'block';
+      };
+
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(plus);
+      card.appendChild(info);
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
