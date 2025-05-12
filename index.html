@@ -7,17 +7,18 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
       margin: 0;
       padding: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #333;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
     .container {
       display: flex;
@@ -39,6 +40,7 @@
       position: relative;
       cursor: pointer;
       transition: transform 0.2s ease-in-out;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
     .tool-card:hover {
       transform: scale(1.05);
@@ -60,14 +62,69 @@
       font-weight: normal;
       margin-top: 0.7rem;
     }
+    .share-button {
+      margin-top: 2rem;
+      background-color: #dddddd;
+      color: #333;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .share-button img {
+      width: 20px;
+      height: 20px;
+    }
+    #shareMsg {
+      display: none;
+      margin-top: 1rem;
+      background-color: #cce5ff;
+      color: #004085;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+    }
+    footer img {
+      height: 30px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
   <h1>Eines de suport docent amb IA</h1>
   <div class="container"></div>
+  <button class="share-button" id="shareBtn">
+    <img src="https://cdn-icons-png.flaticon.com/512/786/786205.png" alt="Share">Comparteix enllaç
+  </button>
+  <div id="shareMsg">🔗 Enllaç copiat al porta-retalls: <a href="https://xatxatxato.github.io/eines-ia-docent/" target="_blank">https://xatxatxato.github.io/eines-ia-docent/</a></div>
+
+  <footer>
+    <p>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC"/>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY"/>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC"/>
+      <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="SA"/>
+      Aquesta obra està sota una llicència <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">Creative Commons Reconeixement-NoComercial-CompartirIgual 4.0 Internacional</a>.
+    </p>
+  </footer>
 
   <script>
-    const tools = [
+    const tools = [...document.querySelectorAll('.tool-card')];
+
+    const container = document.querySelector('.container');
+
+    const toolData = [
       { name: 'Diffit', url: 'https://www.diffit.me', color: '#ffbe0b', desc: 'Textos adaptats segons nivell.', info: 'Adaptació de textos, preguntes i resums segons nivell.' },
       { name: 'Eduaide', url: 'https://eduaide.ai', color: '#fb5607', desc: 'Generador de rúbriques i activitats.', info: 'Generació de rúbriques, activitats i preguntes segons Bloom/Webb.' },
       { name: 'Napkin', url: 'https://www.napkin.ai', color: '#8338ec', desc: 'Organitzador visual d’idees.', info: 'Notes intel·ligents, connexions entre idees, pensament visual.' },
@@ -82,9 +139,7 @@
       { name: 'Suno.ai', url: 'https://suno.ai', color: '#f15bb5', desc: 'Cançons didàctiques IA.', info: 'Creació de cançons didàctiques per a reforçar l\'aprenentatge lingüístic.' }
     ];
 
-    const container = document.querySelector('.container');
-
-    tools.forEach(tool => {
+    toolData.forEach(tool => {
       const card = document.createElement('div');
       card.className = 'tool-card';
       card.style.backgroundColor = tool.color;
@@ -115,6 +170,13 @@
       card.appendChild(plus);
       card.appendChild(info);
       container.appendChild(card);
+    });
+
+    document.getElementById('shareBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText('https://xatxatxato.github.io/eines-ia-docent/');
+      const msg = document.getElementById('shareMsg');
+      msg.style.display = 'block';
+      setTimeout(() => msg.style.display = 'none', 5000);
     });
   </script>
 </body>
